@@ -7,6 +7,7 @@ import cors from 'cors'
 import bodyParser from 'body-parser';
 import xss from 'xss' //xss is a module used to filter input from users to prevent XSS attacks.
 import userRoute from './routes/user.js'
+import chatRoute from './routes/messages.js'
 const app = express();
 app.use(express.urlencoded({
     extended: true
@@ -35,5 +36,6 @@ app.use('/talk', limiter)
 // app.use('/', (req, res) => {
 //     res.send("server is working! YaY!")})
 app.use('/api/auth', userRoute)
+app.use('/api/chat', chatRoute)
 
 export default app;
