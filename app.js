@@ -6,7 +6,7 @@ import mongoSanitize from 'express-mongo-sanitize' //middleware which sanitizes 
 import cors from 'cors'
 import bodyParser from 'body-parser';
 import xss from 'xss' //xss is a module used to filter input from users to prevent XSS attacks.
-
+import userRoute from './routes/user.js'
 const app = express();
 app.use(express.urlencoded({
     extended: true
@@ -32,6 +32,8 @@ const limiter=rateLimit({
     message: 'Too many request from this id, please try again in one hour'
 })
 app.use('/talk', limiter)
-
+// app.use('/', (req, res) => {
+//     res.send("server is working! YaY!")})
+app.use('/api/auth', userRoute)
 
 export default app;
