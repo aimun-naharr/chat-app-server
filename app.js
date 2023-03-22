@@ -32,7 +32,7 @@ const limiter=rateLimit({
     windowMs: 60* 60 * 1000, // in one hour
     message: 'Too many request from this id, please try again in one hour'
 })
-app.use('/talk', limiter)
+// app.use('/talk', limiter)
 // app.use('/', (req, res) => {
 //     res.send("server is working! YaY!")})
 app.use('/api/auth', userRoute)

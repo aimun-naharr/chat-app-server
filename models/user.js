@@ -2,17 +2,11 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
 	{
-		firstName: {
-			type: String,
-			required: [true, "FirstName is required"],
-		},
-		lastName: {
+		userName: {
 			type: String,
 			required: [true, "LastName is required"],
 		},
-		avatar: {
-			type: String,
-		},
+
 		email: {
 			type: String,
 			required: [true, "Email is required"],
@@ -31,8 +25,13 @@ const userSchema = new mongoose.Schema(
 			min: 6,
 			required: true,
 		},
-		
-		
+		avatar: {
+			type: String,
+		},
+		isAvatarImageSet: {
+			type: Boolean,
+			default: false,
+		},
 	},
 	{ timestamps: true }
 );
