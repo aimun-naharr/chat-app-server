@@ -15,6 +15,24 @@ export const sendMsg=async(req, res)=>{
         console.log(error)
     }
 }
-export const getMsg=async(req, res)=>{
-
+export const getAllMsg=async(req, res)=>{
+try {
+    const {from , to}=req.body
+    const messages=await Message.find({
+        users: {
+            $all: [from, to]
+        }
+    }).sort({updatedAt: 1})
+   if(messages){
+    const projectMessage=messages.map(msg=>{
+        return {
+            fromSelf: msg.sender.toString()=== from,
+            message: msg.text
+        }
+    })
+    res.status(200).json(projectMessage)
+   }
+} catch (error) {
+    console.log(error)
+}
 }
