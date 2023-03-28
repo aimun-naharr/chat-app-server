@@ -57,7 +57,9 @@ export const setAvatar = async (req, res) => {
 			isAvatarImageSet: true,
 			avatar,
 		});
-		return res.status(200).json({ isSet: userData.isAvatarImageSet, image: userData.avatar });
+		const user=await User.findByIdAndUpdate(userData._id)
+		
+		return res.status(200).json({ isSet: user.isAvatarImageSet, image: user.avatar,  });
 	} catch (error) {
 		res.status(500).send({ error: error.message });
 	}

@@ -27,7 +27,9 @@ try {
     const projectMessage=messages.map(msg=>{
         return {
             fromSelf: msg.sender.toString()=== from,
-            message: msg.text
+            message: msg.text,
+            _id: msg._id,
+            time: msg.createdAt
         }
     })
     res.status(200).json(projectMessage)
