@@ -15,7 +15,7 @@ app.use(express.urlencoded({
 // app.use(xss())
 app.use(mongoSanitize())
 app.use(cors({
-    origin: '*',
+    origin: 'http://127.0.0.1:5173/',
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'],
     credentials: true
 }))
