@@ -24,23 +24,23 @@ app.use(express.json({limit: '10kb'}))
 app.use(bodyParser.json())     //it will parse the json data
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(helmet())    //it will set up various headers in the response
-if(process.env.NODE_ENV=== 'development'){
-    app.use(morgan('dev'))
-}
 
-const limiter=rateLimit({
-    max: 3000, //max request can be 3000
-    windowMs: 60* 60 * 1000, // in one hour
-    message: 'Too many request from this id, please try again in one hour'
-})
+
 // app.use('/talk', limiter)
-app.use('/', (req, res,next) => {
-    res.send("server is working! YaY!")
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+// app.use('/', (req, res,next) => {
+//     res.send("server is working! YaY!")
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//     next();
+// })
+app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
     next();
-})
+});
+
 app.use('/api/auth', userRoute)
 app.use('/api/chat', chatRoute)
 
