@@ -27,19 +27,16 @@ app.use(helmet())    //it will set up various headers in the response
 
 
 // app.use('/talk', limiter)
-// app.use('/', (req, res,next) => {
-//     res.send("server is working! YaY!")
-//     res.header('Access-Control-Allow-Origin', '*');
-//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-//     next();
-// })
-app.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', ['*']);
-    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.append('Access-Control-Allow-Headers', 'Content-Type');
+app.use('/', (req, res,next) => {
+    // res.send("server is working! YaY!")
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Max-Age", "1800");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" ); 
     next();
-});
+})
+
 
 app.use('/api/auth', userRoute)
 app.use('/api/chat', chatRoute)
