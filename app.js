@@ -9,16 +9,17 @@ import xss from 'xss' //xss is a module used to filter input from users to preve
 import userRoute from './routes/user.js'
 import chatRoute from './routes/messages.js'
 const app = express();
+app.use(cors({
+    origin: 'http://127.0.0.1:5173',
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'],
+    credentials: true
+}))
 app.use(express.urlencoded({
     extended: true
 }))
 // app.use(xss())
 app.use(mongoSanitize())
-app.use(cors({
-    origin: 'http://127.0.0.1:5173/',
-    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'],
-    credentials: true
-}))
+
 app.use(express.json({limit: '10kb'}))
 app.use(bodyParser.json())     //it will parse the json data
 app.use(bodyParser.urlencoded({extended: true}))
