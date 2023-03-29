@@ -33,8 +33,8 @@ const limiter=rateLimit({
     message: 'Too many request from this id, please try again in one hour'
 })
 // app.use('/talk', limiter)
-// app.use('/', (req, res) => {
-//     res.send("server is working! YaY!")})
+app.use('/', (req, res) => {
+    res.send("server is working! YaY!")})
 app.use('/api/auth', userRoute)
 app.use('/api/chat', chatRoute)
 
