@@ -14,10 +14,7 @@ const server = http.createServer(app); //creating the server
 const DB=process.env.DBURI.replace('password', process.env.PASSWORD)
 
 mongoose.connect(DB, {
-	// useNewUrlParser: true,
-	// useCreateIndex: true,
-	// useFindAndModify: false,
-	// useUnifiedTopology: true,
+	
 }).then(connection=>{
 	console.log('db connection is successful') //db connected
 }).catch(err=>{
